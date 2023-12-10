@@ -1,0 +1,63 @@
+public class CustomQueue {
+    private static final int MAX_CAPACITY = 100;
+    private int[] elements;
+    private int frontIndex;
+    private int rearIndex;
+
+    public CustomQueue() {
+        elements = new int[MAX_CAPACITY];
+        frontIndex = 0;
+        rearIndex = -1;
+    }
+
+    public boolean isEmpty() {
+        return (frontIndex == rearIndex + 1);
+    }
+
+    public boolean isFull() {
+        return (rearIndex == MAX_CAPACITY - 1);
+    }
+
+    public void enqueue(int value) {
+        if (isFull()) {
+            System.out.println("Queue is full; unable to enqueue.");
+        } else {
+            elements[++rearIndex] = value;
+        }
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty; unable to dequeue.");
+            return -1;
+        } else {
+            int value = elements[frontIndex++];
+            return value;
+        }
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty; unable to peek.");
+            return -1;
+        } else {
+            return elements[frontIndex];
+        }
+    }
+
+    public int size() {
+        return rearIndex - frontIndex + 1;
+    }
+
+    public static void main(String[] args) {
+        CustomQueue queue = new CustomQueue();
+
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+
+        System.out.println("Dequeued: " + queue.dequeue());
+        System.out.println("Front element: " + queue.peek());
+        System.out.println("Queue size: " + queue.size());
+    }
+}

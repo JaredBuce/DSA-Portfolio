@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+public class CircularLinkedList {
+    
+    // Definition of a node representing an element in the list.
+    public class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    // Initialization of head and tail pointers set to null initially.
+    public Node head = null;
+    public Node tail = null;
+
+    // Method to add a new node to the end of the circular linked list.
+    public void add(int data) {
+        Node newNode = new Node(data);
+
+        // Check if the list is empty.
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            newNode.next = head;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+            tail.next = head;
+        }
+    }
+
+    // Display all the nodes in the circular linked list.
+    public void display() {
+        Node current = head;
+
+        if (head == null) {
+            System.out.println("The list is empty");
+        } else {
+            System.out.println("Nodes of the circular linked list: ");
+            do {
+                System.out.print(" " + current.data);
+                current = current.next;
+            } while (current != head);
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Obtain user input for node data using the Scanner class.
+        Scanner input = new Scanner(System.in);
+        CircularLinkedList list = new CircularLinkedList();
+
+        // Prompt the user to enter data for nodes.
+        for (int i = 1; i <= 9; i++) {
+            System.out.print("Enter data for node " + i + ": ");
+            int data = input.nextInt();
+            list.add(data);
+        }
+
+        // Display all the nodes in the circular linked list.
+        list.display();
+
+        // Calculate and display the sum of all data in the nodes.
+        int sum = 0;
+        CircularLinkedList.Node current = list.head;
+        do {
+            sum += current.data;
+            current = current.next;
+        } while (current != list.head);
+
+        System.out.print("The sum of all data is " + sum);
+    }
+}

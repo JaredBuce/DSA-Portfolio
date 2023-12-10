@@ -1,0 +1,85 @@
+public class Main {
+    public static void main(String[] args) {
+        // Create a stack with a size of 5
+        CustomStack stack = new CustomStack(5);
+
+        // Push elements onto the stack
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        stack.push(40);
+        stack.push(50);
+
+        // Display elements in the stack
+        System.out.println("Elements in the stack:");
+        stack.printStack();
+        System.out.println(); // Move to a new line
+
+        // Display the top element of the stack
+        System.out.print("Top element of the stack: ");
+        stack.printTop();
+        System.out.println(); // Move to a new line
+
+        // Pop elements from the stack
+        System.out.println("\nPopping elements from the stack:");
+        System.out.println(stack.pop()); // Pop and print
+        System.out.println(stack.pop()); // Pop and print
+        System.out.println(stack.pop()); // Pop and print
+
+        // Display the remaining elements in the stack after popping
+        System.out.println("\nElements remaining in the stack after popping:");
+        stack.printStack();
+    }
+
+    static class CustomStack {
+        private int array[];
+        private int top;
+        private int capacity;
+
+        // Constructor to initialize the stack
+        CustomStack(int size) {
+            array = new int[size];
+            capacity = size;
+            top = -1;
+        }
+
+        public void push(int x) {
+            if (isFull()) {
+                System.out.println("Stack Overflow");
+                System.exit(1);
+            }
+            System.out.println("Inserting " + x);
+            array[++top] = x;
+        }
+
+        public int pop() {
+            if (isEmpty()) {
+                System.out.println("Stack Empty");
+                System.exit(1);
+            }
+            return array[top--];
+        }
+
+        public int getSize() {
+            return top + 1;
+        }
+
+        public Boolean isEmpty() {
+            return top == -1;
+        }
+
+        public Boolean isFull() {
+            return top == capacity - 1;
+        }
+
+        public void printStack() {
+            for (int i = 0; i <= top; i++) {
+                System.out.print(array[i] + ", ");
+            }
+        }
+
+        public void printTop() {
+            System.out.print(array[top]);
+        }
+    }
+}

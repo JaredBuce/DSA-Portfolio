@@ -1,0 +1,87 @@
+class Node {
+    int key;
+    Node left, right;
+
+    public Node(int item) {
+        key = item;
+        left = right = null;
+    }
+}
+
+public class BinaryTree {
+    Node root;
+
+    public BinaryTree() {
+        root = null;
+    }
+
+    // Insert a key into the binary tree
+    public void insert(int key) {
+        root = insertRec(root, key);
+    }
+
+    // Helper method to recursively insert a key
+    private Node insertRec(Node currentRoot, int key) {
+        if (currentRoot == null) {
+            currentRoot = new Node(key);
+            return currentRoot;
+        }
+
+        if (key < currentRoot.key) {
+            currentRoot.left = insertRec(currentRoot.left, key);
+        } else if (key > currentRoot.key) {
+            currentRoot.right = insertRec(currentRoot.right, key);
+        }
+
+        return currentRoot;
+    }
+
+    // Perform an inorder traversal of the binary tree
+    public void inorderTraversal(Node currentNode) {
+        if (currentNode != null) {
+            inorderTraversal(currentNode.left);
+            System.out.print(currentNode.key + " ");
+            inorderTraversal(currentNode.right);
+        }
+    }
+
+    // Perform a preorder traversal of the binary tree
+    public void preorderTraversal(Node currentNode) {
+        if (currentNode != null) {
+            System.out.print(currentNode.key + " ");
+            preorderTraversal(currentNode.left);
+            preorderTraversal(currentNode.right);
+        }
+    }
+
+    // Perform a postorder traversal of the binary tree
+    public void postorderTraversal(Node currentNode) {
+        if (currentNode != null) {
+            postorderTraversal(currentNode.left);
+            postorderTraversal(currentNode.right);
+            System.out.print(currentNode.key + " ");
+        }
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+
+        System.out.println("Inorder Traversal:");
+        tree.inorderTraversal(tree.root);
+
+        System.out.println("\nPreorder Traversal:");
+        tree.preorderTraversal(tree.root);
+
+        System.out.println("\nPostorder Traversal:");
+        tree.postorderTraversal(tree.root);
+    }
+}
